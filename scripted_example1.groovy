@@ -1,4 +1,4 @@
-
+@Library('workshop@library')_
 
 node {
     stage('Build') {
@@ -11,8 +11,4 @@ node {
             echo 'I execute elsewhere'
         }
     }
-}
-
-def build(){
-    echo "Build"
 }
