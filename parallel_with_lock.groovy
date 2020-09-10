@@ -3,6 +3,12 @@
 pipeline{
     agent any
     stages{
+        stage("Check trigger"){
+           when { triggeredBy 'Branch indexing' }
+           steps {
+               error('Aborting the build caused by: Branch indexing')
+           }
+       }
         stage('Parallel test'){
             steps {
                 parallel(
