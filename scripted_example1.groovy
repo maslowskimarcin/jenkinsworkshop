@@ -16,3 +16,7 @@ node {
 def build(){
     echo "Build"
 }
+
+def promoteArtifactory(version){
+    echo "Promoting artifactory ${version}"
+}
