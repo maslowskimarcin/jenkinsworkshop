@@ -13,7 +13,7 @@ pipeline {
                checkout scm
            }
        }
-       stage(Build) {
+       stage('Build') {
            agent {
                label 'linux'
            }
