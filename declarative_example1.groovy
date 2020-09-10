@@ -19,7 +19,7 @@ pipeline {
            }
            steps {
                checkout scm
-               build()
+               println "build"
            }
        }
    }
