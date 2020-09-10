@@ -6,9 +6,11 @@ pipeline {
                retry(2)
            }
            steps {
-               retry(3) {
-                   echo "Error 1"
-                   error("error1")
+               catchError{
+                    retry(3) {
+                        echo "Error 1"
+                        error("error1")
+                    }
                }
                echo "Error 2"
                error("error2")
