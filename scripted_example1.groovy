@@ -1,6 +1,6 @@
 @Library('workshop@library')_
 
-node (linux) {
+node ("linux") {
     stage('Build') {
         if (env.BRANCH_NAME == 'master') {
             echo 'Build master version'
