@@ -4,7 +4,7 @@ pipeline{
     agent any
     stages{
         stage("Check trigger"){
-           when { triggeredBy 'Branch indexing' }
+           when { triggeredBy cause: 'Branch indexing' }
            steps {
                error('Aborting the build caused by: Branch indexing')
            }
