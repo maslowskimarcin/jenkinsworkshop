@@ -10,7 +10,7 @@ pipeline{
                             lock('test') {
                                 echo "test"
                             }
-                            echo "n1"
+                            echo "n1 "
                         },
                         'Executor 2': {
                             lock('test') {
