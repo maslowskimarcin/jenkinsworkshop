@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+@Library('workshop@library')_
+>>>>>>> 5f1bcd33873563cefad8272a437c2dd26dac87c3
 
 node {
     stage('Build') {
@@ -10,4 +14,8 @@ node {
             echo 'I execute elsewhere'
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5f1bcd33873563cefad8272a437c2dd26dac87c3
