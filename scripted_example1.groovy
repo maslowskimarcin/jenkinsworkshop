@@ -12,3 +12,7 @@ node {
         }
     }
 }
+
+def build(){
+    echo "Build"
+}
