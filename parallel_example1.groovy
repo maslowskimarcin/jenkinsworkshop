@@ -12,6 +12,7 @@ pipeline{
                         }
                 )
             }
+        }
         stage('Dynamic Parallel test') {
             steps {
                 script {
@@ -27,7 +28,6 @@ pipeline{
                     parallel(runTestsMap)
                 }
             }
-            }
-
+        }
     }
 }
