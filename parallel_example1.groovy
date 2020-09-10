@@ -1,3 +1,5 @@
+@Library('workshop@library')_
+
 pipeline{
     agent any
     stages{
