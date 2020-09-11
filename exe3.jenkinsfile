@@ -36,7 +36,7 @@ pipeline {
                     },
                     'Executor 2': {
                         lock("archive"){
-                            sh script: "${branch} > testFile.txt"
+                            sh script: "echo '${branch}' > testFile.txt"
                         }
                     },
                     'Executor 3': {
@@ -51,7 +51,7 @@ pipeline {
         }
         stage('Checkout') {
             agent {
-                label "${agent}"
+                label "${agentName}"
             }
             when{
                 expression { params.branch == "development" }
