@@ -11,11 +11,11 @@ pipeline {
                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false,
                extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/maslowskimarcin/jenkinsworkshop.git']]])
            }
-       }
-       post{
-           success{
-               echo "SUCCESS"
-           }
-       }
-   }
+           post{
+                success{
+                    echo "SUCCESS"
+                }
+            }
+        }
+    }
 }
