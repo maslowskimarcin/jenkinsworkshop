@@ -19,8 +19,8 @@ pipeline {
             }
             steps {
                 dir('jenkinsWorkshop') {
-                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [],
-                    submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/maslowskimarcin/jenkinsworkshop.git']]])
+                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [],
+                    userRemoteConfigs: [[credentialsId: '88be31a8-fb7f-452a-88fa-dd5ef1eac6ee', url: 'https://github.com/maslowskimarcin/jenkinsworkshop.git']]])
 
                     sh script: 'ls -la'
                 }
