@@ -5,12 +5,12 @@ pipeline {
        label "master"
    }
    parameters{
-        string(name: 'Version', defaultValue: 'latest', description: 'Version')
+        string(name: 'version', defaultValue: 'latest', description: 'Version')
    }
    stages {
        stage('Change name') {
            steps {
-                setDisplayName()
+                setDisplayName(version)
            }
         }
         stage('Checkout') {
