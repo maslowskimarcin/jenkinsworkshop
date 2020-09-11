@@ -30,7 +30,9 @@ pipeline {
            steps {
                 parallel(
                     'Executor 1': {
-                        currentBuild.displayName = "#${BUILD_NUMBER}-v.${branch}"
+                        script{
+                            currentBuild.displayName = "#${BUILD_NUMBER}-v.${branch}"
+                        }
                     },
                     'Executor 2': {
                         lock("archive"){
