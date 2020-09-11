@@ -1,0 +1,30 @@
+@Library('workshop@library')_
+
+pipeline {
+   agent {
+       label "master"
+   }
+   parameters{
+        string(name: 'Version', defaultValue: 'latest', description: 'Version')
+   }
+   stages {
+       stage('Change name') {
+           steps {
+                setDisplayName()
+           }
+        }
+        stage('Checkout') {
+            agent {
+                label "linux"
+            }
+            steps {
+                dir('jenkinsWorkshop') {
+                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [],
+                    submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/maslowskimarcin/jenkinsworkshop.git']]])
+
+                    sh script: 'ls -la'
+                }
+            }
+        }
+    }
+}
