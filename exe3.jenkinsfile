@@ -52,7 +52,7 @@ pipeline {
                 label "${agent}"
             }
             when{
-                expression { return if params.branch == "development" }
+                expression { params.branch == "development" }
             }
             steps {
                 dir('workshop') {
