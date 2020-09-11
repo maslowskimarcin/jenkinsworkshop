@@ -1,0 +1,65 @@
+@Library('workshop@library')_
+
+pipeline {
+   agent {
+       label "master"
+   }
+   parameters{
+        string(name: 'branch', defaultValue: 'development', description: 'Branch Name')
+        choice(choices: ['master', 'linux'], description: 'Select agent', name: 'agentName')
+   }
+   options {
+       buildDiscarder logRotator(daysToKeepStr: '10', numToKeepStr: '2')
+   }
+   stages {
+        stage('Trigger check - indexing') {
+            steps {
+                script {
+                    def causes = currentBuild.rawBuild.getCauses()
+                    for (cause in causes) {
+                        def causeDesc = cause.getShortDescription()
+                        if (causeDesc.contains("Branch indexing")) {
+                            currentBuild.result = 'ABORTED'
+                            error('Aborting the build caused by: ' + causeDesc)
+                        }
+                    }
+                }
+            }
+        }
+       stage('Change name') {
+           steps {
+                parallel(
+                    'Executor 1': {
+                        currentBuild.displayName = "#${BUILD_NUMBER}-v.${branch}"
+                    },
+                    'Executor 2': {
+                        lock("archive"){
+                            sh script: "${branch} > testFile.txt"
+                        }
+                    },
+                    'Executor 3': {
+                        lock("archive"){
+                            archiveArtifacts artifacts: 'testFile.txt', followSymlinks: false
+                            stash includes: 'testFile.txt', name: 'testFile'
+                        }
+                    }
+               )
+
+           }
+        }
+        stage('Checkout') {
+            agent {
+                label "${agent}"
+            }
+            when{
+                expression { return if params.branch == "development" }
+            }
+            steps {
+                dir('workshop') {
+                    unstash 'testFile'
+                    sh script: "cat testFile.txt"
+                }
+            }
+        }
+    }
+}
